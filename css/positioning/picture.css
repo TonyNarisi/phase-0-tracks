@@ -3,7 +3,6 @@
   z-index: 0;
   position: absolute;
   width: 16%;
-  outline: 1px solid red;
 }
 
 #hat {
@@ -11,5 +10,11 @@
   z-index: 1;
   position: absolute;
   width: 20%;
-  outline: 1px solid red;
+}
+
+#glasses {
+  margin: 12.5% 45%;
+  z-index: 2;
+  position: absolute;
+  width: 11%;
 }
