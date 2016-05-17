@@ -1,0 +1,15 @@
+#octopus {
+  margin: 5% 42%;
+  z-index: 0;
+  position: absolute;
+  width: 16%;
+  outline: 1px solid red;
+}
+
+#hat {
+  margin-left: 41%;
+  z-index: 1;
+  position: absolute;
+  width: 20%;
+  outline: 1px solid red;
+}
