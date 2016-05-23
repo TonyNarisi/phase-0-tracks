@@ -1,0 +1,33 @@
+Elevator Algorithm
+
+- If the floor number that you need to go to is greater than the floor number you are currently on:
+	- Press the “Up” button
+	- When the elevator doors open, enter the elevator
+	- Start on the button with the number that is 1 more than the number of the floor you are currently on. Until you reach the number of the floor that you need to go to
+		- Check if the current button’s number is equal to the number of the floor that you need to go to
+		- If it is not, add 1 to the number and repeat the process
+		- If it is, press the button of the current number
+- If the floor number that you need to go to is less than the floor number you are currently on:
+	- Press the “Down” button
+	- When the elevator doors open, enter the elevator
+	- Start on the button with the number that is 1 less than the number of the floor you are currently on. Until you reach the number of the floor that you need to go to
+		- Check if the current button’s number is equal to the number of the floor that you need to go to
+		- If it is not, subtract 1 from the number and repeat the process
+		- If it is, press the button of the current number
+- When the elevator doors open, check the number of the current floor
+	- If it is equal to the number of the floor you need to go to, exit the elevator
+	- If it is not equal to the number of the floor you need to go to, stay inside of the elevator and wait for it to move again, then repeat this process when the doors open next
+
+Reading a Book Algorithm
+
+- Remove book from shelf, or other current resting position
+- If this book has been read partially before, open it to the bookmarked page. If it has not been read partially, open it to the first page.
+- Read each word on the page in sequence, from the first word to the last word
+- After reading the last word on the page
+	- If this page is on the left side of the book, move your eyes to the page on the right side of the book and repeat the word-reading process.
+	- If this page is on the right side of the book, pick up the piece of paper that the page is on and move it to the left side of the book, revealing two new pages. Repeat the word-reading process for the page on the left side of the book.
+- Repeat the previous step until either of the following conditions have been met:
+	- The page that has just been read is the last page in the book
+	- The reader does not desire to continue at the moment
+- If the last page in the book has been read, close the book without placing the bookmark in it and return the book to the shelf
+- If the reader does not desire to continue at the moment, place the bookmark in between the left and right pages that are currently open. Close the book, keeping the bookmark inside. Return the book to its resting position.
