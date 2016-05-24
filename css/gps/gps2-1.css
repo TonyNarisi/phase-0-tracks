@@ -1,3 +1,51 @@
-body {
-  background: grey;
+header {
+  padding: 3px;
+  border: solid 1px black;
+}
+
+img {
+  width: 33%;
+  margin-left: 33%;
+  margin-right: 33%;
+}
+
+header h1 {
+  text-align: center;
+  font-family: cursive;
+}
+
+h2 {
+  font-family: sans-serif;
+  color: black;
+}
+
+.column-1 {
+  width: 45%;
+  background-color: grey;
+  display: inline-block;
+  vertical-align: top;
+  padding: 3px;
+  border: solid 1px black;
+  color: white;
+  
+}
+
+.column-2 {
+  width: 45%;
+  background-color: blue;
+  display: inline-block;
+  vertical-align: top;
+  padding: 3px;
+  border: solid 1px black;
+  color: white;
+}
+
+header, footer {
+  background-color: #00ff00;
+}
+
+footer {
+  padding: 3px;
+  border: solid 1px black;
+  text-align: center;
 }
