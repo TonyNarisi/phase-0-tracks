@@ -15,20 +15,17 @@ def alias_creator(name)
   codename = ""
   vowels = "aeiou"
   consonants = "bcdfghjklmnpqrstvwxyz"
-  reversed_name.split("").map do |char|
-    if vowels.include?(char) && char != "u"
-      codename << vowels[vowels.index(char) + 1]
-    elsif char == "u"
-      codename << "a"
-    elsif consonants.include?(char) && char != "z"
-      codename << consonants[consonants.index(char) + 1]
-    elsif char == "z"
-      codename << "b"
+  reversed_name.split("").each do |char|
+    if vowels.include?(char)
+      # Modulo expression fixes edge cases
+      codename << vowels[(vowels.index(char) + 1) % vowels.length]
+    elsif consonants.include?(char)
+      codename << consonants[(consonants.index(char) + 1) % consonants.length]
     else
       codename << char
     end
   end
-  codename.split(" ").map{ |word| word.capitalize }.join(" ")
+  codename.split(" ").map{|word| word.capitalize}.join(" ")
 end
 
 # Driver Code
