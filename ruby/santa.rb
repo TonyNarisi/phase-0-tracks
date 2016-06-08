@@ -1,10 +1,14 @@
 class Santa
 
+  attr_reader :age, :ethnicity
+
+  attr_accessor :gender
+
   def initialize(gender, ethnicity)
     p "Initializing Santa instance..."
     @gender = gender
     @ethnicity = ethnicity
-    reindeer_ranking = ["Rudolph", "Dasher", "Dancer", "Prancer", "Vixen", "Comet", "Cupid", "Donner", "Blitzen"]
+    @reindeer_ranking = ["Rudolph", "Dasher", "Dancer", "Prancer", "Vixen", "Comet", "Cupid", "Donner", "Blitzen"]
     @age = 0
   end
 
@@ -21,20 +25,8 @@ class Santa
   end
 
   def get_mad_at(reindeer_name)
-    reindeer_ranking.delete(reindeer_name)
-    reindeer_ranking << reindeer_name
-  end
-
-  def gender=(new_gender)
-    @gender = new_gender
-  end
-
-  def age
-    @age
-  end
-
-  def ethnicity
-    @ethnicity
+    @reindeer_ranking.delete(reindeer_name)
+    @reindeer_ranking << reindeer_name
   end
 
 end
@@ -50,11 +42,11 @@ santa_genders = ["transgender", "androgynous", "gender questioning", "female", "
 santa_ethnicities = ["Native American", "Pacific Islander", "African American", "Asian", "Latino"]
 santa_genders.length.times { |i| santas << Santa.new(santa_genders[i], santa_ethnicities[i]) }
 
-santas[0].age
+p "#{santas[0].age}"
 santas[0].celebrate_birthday
-santas[0].age
-santas[0].ethnicity
-santas[0].gender = "androgynouse"
+p "#{santas[0].age}"
+p "#{santas[0].ethnicity}"
+santas[0].gender = "androgynous"
 santas[0].get_mad_at("Dasher")
 
 p santas
