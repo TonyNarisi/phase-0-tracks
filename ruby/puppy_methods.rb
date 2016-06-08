@@ -21,6 +21,10 @@ class Puppy
     p "*puts paw out*" * num.to_i
   end
 
+  def initialize
+    p "Initializing new puppy instance..."
+  end
+
 end
 
 # DRIVER CODE
