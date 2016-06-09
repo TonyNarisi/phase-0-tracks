@@ -1,8 +1,8 @@
 # Designing a "Cup" class
-# Every cup has three attributes:
+# Every cup has four attributes:
 #   - size (in mL)
 #   - contents (can be changed by user)
-#   - amount of liquid in cup
+#   - amount of liquid in cup (in mL)
 #   - color
 # Every cup has three methods:
 #   - pour out (removes a specified amount of liquid)
@@ -75,5 +75,50 @@ end
 # cup.fill_up(60)
 # p cup.liquid_amount
 
+# Release 2
 
+# User Interface
 
+cup_array = []
+
+# Allows user to create as many instances as they would like
+
+user_answer = ""
+until user_answer == "no"
+  p "Would you like to create a new cup? (yes/no)"
+  user_answer = gets.chomp
+  until user_answer == "yes" || user_answer == "no"
+    p "Please indicate whether or not you'd like to create a new cup with 'yes' or 'no'."
+    user_answer = gets.chomp
+  end
+  break if user_answer == "no"
+
+  # Gets attributes of instance from user
+
+  p "What is the size of the cup in milliliters?"
+  size = gets.chomp.to_i
+  p "What type of liquid is in the cup?"
+  contents = gets.chomp
+  p "How much of the liquid is in the cup in milliliters?"
+  liquid_amount = gets.chomp.to_i
+    until liquid_amount < size
+      p "Please indicate an amount of liquid less than or equal to the size of the cup."
+      liquid_amount = gets.chomp.to_i
+    end
+  p "What color is the cup?"
+  color = gets.chomp
+
+  # Stores attributes as instance of class in array
+
+  cup = Cup.new(size, contents, liquid_amount, color)
+  cup_array << cup
+end
+
+# Prints confirmation of all instances created and their attributes
+
+cup_array.each do |cup|
+  p "Cup #{cup_array.index(cup)} size: #{cup.size}"
+  p "Cup #{cup_array.index(cup)} contents: #{cup.contents}"
+  p "Cup #{cup_array.index(cup)} amount of liquid: #{cup.liquid_amount}"
+  p "Cup #{cup_array.index(cup)} color: #{cup.color}"
+end
