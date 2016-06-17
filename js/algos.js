@@ -2,19 +2,31 @@
 // Input: an array of words and/or phrases
 // Steps:
 //  - Save the first word/phrase as the "current longest"
+//  - Push the first word/phrase into the array of the longest items
 //  - Evaluate the second word/phrase
-//  - If the length of the second word/phrase is longer than the length of the first word/phrase, save over the "current longest" with the second word/phrase
+//  - If the length of the second word/phrase is longer than the length of the first word/phrase, save over the "current longest" with the second word/phrase, and push this word into the longest items array
 //  - Repeat this process until every word/phrase in the array has been evaluated
-// Output: the longest word or phrase in the array
+//  - Loop through the longest items array
+//    - For each word/phrase, if its length is less than the length of the "current longest" word, delete it from the array, and move the loop counting variable back by 1 to compensate for the shift in indices
+//  - Return the array
+// Output: the longest word(s) and/or phrase(s) in the array. This will be returned as an array to allow for ties
 
 function findLongest(array) {
   var currentLongest = array[0];
+  var longestItems = [array[0]]
   for (var i = 1; i < array.length; i++) {
-    if (array[i].length > currentLongest.length) {
+    if (array[i].length >= currentLongest.length) {
       currentLongest = array[i];
+      longestItems.push(array[i]);
     }
   }
-  return currentLongest;
+  for (var n = 0; n < longestItems.length; n++) {
+    if (longestItems[n].length < currentLongest.length) {
+      longestItems.splice(n, 1)
+      n -= 1
+    }
+  }
+  return longestItems;
 }
 
 // Finding key-value pairs
@@ -81,9 +93,9 @@ function randomData(num) {
 // TESTS
 
 // Release 0
-// console.log(findLongest(["long", "longer", "longest"]));
-// console.log(findLongest(["first", "second", "third"]));
-// console.log(findLongest(["very long string", "not long", "but now this string is even longer"]))
+console.log(findLongest(["long", "longest", "nope longest here", "longer"]));
+console.log(findLongest(["first", "second aa", "third", "tied case", "tied also"]));
+console.log(findLongest(["very long string", "not long", "but now this string is even longer", "oh no these strings are getting way too long"]))
 
 // Release 1
 // console.log(pairChecker({name: "Tyrese", age: 25}, {name: "Bill", age: 25}))
@@ -91,8 +103,8 @@ function randomData(num) {
 // console.log(pairChecker({favePizza: "plain", location: "New York"}, {favePizza: "cheese", location: "Pennsylvania"}))
 
 // Release 2
-for (var i = 1; i <= 10; i++) {
-  currentData = randomData(Math.floor(Math.random() * 15) + 1);
-  console.log(currentData);
-  console.log(findLongest(currentData));
-}
+// for (var i = 1; i <= 10; i++) {
+//   currentData = randomData(Math.floor(Math.random() * 15) + 1);
+//   console.log(currentData);
+//   console.log(findLongest(currentData));
+// }
