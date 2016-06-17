@@ -41,12 +41,58 @@ function pairChecker(object1, object2) {
   return matchingPair
 }
 
+// Generating random string
+// Input: none
+// Steps:
+//  - Define a string with all letters of alphabet
+//  - Define an empty string
+//  - Generate a random number between 1 and 10 to determine the length of the string that will be generated
+//  - Build a loop that will go from 1 to the random number just generated
+//    - For each iteration, generate a random number between 0 and 25
+//    - Add the character from the alphabet string located at the index of this randomly generated number to the string
+// Output: a string
+
+// Generating random test data
+// Input: an integer
+// Steps:
+//  - Define an empty array
+//  - Build a loop that will go from 1 to the integer specified by the input
+//    - For each iteration, add the randomly generated string to the array
+// Output: a randomly generated array with a length of the integer given for input
+
+function randomString() {
+  alphabet = "abcdefghijklmnopqrstuvwxyz"
+  var string = "";
+  var stringLength = Math.floor((Math.random() * 10) + 1);
+  for (var i = 1; i <= stringLength; i++) {
+    string += alphabet[Math.floor((Math.random() * 25))];
+  }
+  return string;
+}
+
+function randomData(num) {
+  var testStrings = [];
+  for (var i = 1; i <= num; i++) {
+    testStrings.push(randomString());
+  }
+  return testStrings;
+}
+
 // TESTS
 
-console.log(findLongest(["long", "longer", "longest"]));
-console.log(findLongest(["first", "second", "third"]));
-console.log(findLongest(["very long string", "not long", "but now this string is even longer"]))
+// Release 0
+// console.log(findLongest(["long", "longer", "longest"]));
+// console.log(findLongest(["first", "second", "third"]));
+// console.log(findLongest(["very long string", "not long", "but now this string is even longer"]))
 
-console.log(pairChecker({name: "Tyrese", age: 25}, {name: "Bill", age: 25}))
-console.log(pairChecker({age: 76, location: "New York"}, {location: "Pennsylvania", age: 76}))
-console.log(pairChecker({favePizza: "plain", location: "New York"}, {favePizza: "cheese", location: "Pennsylvania"}))
+// Release 1
+// console.log(pairChecker({name: "Tyrese", age: 25}, {name: "Bill", age: 25}))
+// console.log(pairChecker({age: 76, location: "New York"}, {location: "Pennsylvania", age: 76}))
+// console.log(pairChecker({favePizza: "plain", location: "New York"}, {favePizza: "cheese", location: "Pennsylvania"}))
+
+// Release 2
+for (var i = 1; i <= 10; i++) {
+  currentData = randomData(Math.floor(Math.random() * 15) + 1);
+  console.log(currentData);
+  console.log(findLongest(currentData));
+}
