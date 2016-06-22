@@ -33,3 +33,31 @@ Harry Potter and the Prisoner of Azkaban|1999|J.K. Rowling
 Harry Potter and the Chamber of Secrets|1998|J.K. Rowling
 
 5. sqlite> DELETE FROM books WHERE year_published=1972;
+
+Release 3
+
+Before trying different joins, I added other rows into both the “books” and “authors” tables that did not have matching IDs, in order to demonstrate the differences.
+
+Left Join:
+sqlite> SELECT books.name, books.year_published, authors.author_name FROM books LEFT OUTER JOIN authors ON books.author_id = authors.id;
+The Hobbit|1937|J.R.R. Tolkien
+The Fellowship of the Ring|1954|J.R.R. Tolkien
+Animal Farm|1945|George Orwell
+1984|1949|George Orwell
+If on a winter's night a traveler|1979|Italo Calvino
+Harry Potter and the Prisoner of Azkaban|1999|J.K. Rowling
+Harry Potter and the Chamber of Secrets|1998|J.K. Rowling
+A Confederacy of Dunces|1980|
+
+Right Join:
+sqlite> SELECT books.name, books.year_published, authors.author_name FROM books RIGHT JOIN authors ON books.author_id = authors.id;
+Error: RIGHT and FULL OUTER JOINs are not currently supported
+
+Right Join is not currently supported by SQLite3, but if it had worked, I would have expected it to return all of the authors, with any books that they had written.
+
+Full Join:
+sqlite> SELECT books.name, books.year_published, authors.author_name FROM books FULL OUTER JOIN authors ON books.author_id = authors.id;
+Error: RIGHT and FULL OUTER JOINs are not currently supported
+
+Full Join is not currently supported by SQLite3, but if it had worked, I would have expected it to return all of the books and all of the authors, including authors without books listed and books without authors listed.
+
