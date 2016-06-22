@@ -1,0 +1,63 @@
+Release 2
+
+1. sqlite> SELECT * FROM books;
+1|The Hobbit|1937|true|1
+2|The Fellowship of the Ring|1954|true|1
+3|Animal Farm|1945|false|2
+4|1984|1949|false|2
+5|If on a winter's night a traveler|1979|false|3
+6|Invisible Cities|1972|false|3
+7|Harry Potter and the Prisoner of Azkaban|1999|true|4
+8|Harry Potter and the Chamber of Secrets|1998|true|4
+
+2. sqlite> UPDATE books SET part_of_larger_series="true" WHERE name="Invisible Cities";
+
+3. sqlite> SELECT * FROM books, authors WHERE books.author_id = authors.id;
+1|The Hobbit|1937|true|1|1|J.R.R. Tolkien
+2|The Fellowship of the Ring|1954|true|1|1|J.R.R. Tolkien
+3|Animal Farm|1945|false|2|2|George Orwell
+4|1984|1949|false|2|2|George Orwell
+5|If on a winter's night a traveler|1979|false|3|3|Italo Calvino
+6|Invisible Cities|1972|true|3|3|Italo Calvino
+7|Harry Potter and the Prisoner of Azkaban|1999|true|4|4|J.K. Rowling
+8|Harry Potter and the Chamber of Secrets|1998|true|4|4|J.K. Rowling
+
+4. sqlite> SELECT books.name, books.year_published, authors.author_name FROM books JOIN authors ON books.author_id = authors.id;
+The Hobbit|1937|J.R.R. Tolkien
+The Fellowship of the Ring|1954|J.R.R. Tolkien
+Animal Farm|1945|George Orwell
+1984|1949|George Orwell
+If on a winter's night a traveler|1979|Italo Calvino
+Invisible Cities|1972|Italo Calvino
+Harry Potter and the Prisoner of Azkaban|1999|J.K. Rowling
+Harry Potter and the Chamber of Secrets|1998|J.K. Rowling
+
+5. sqlite> DELETE FROM books WHERE year_published=1972;
+
+Release 3
+
+Before trying different joins, I added other rows into both the “books” and “authors” tables that did not have matching IDs, in order to demonstrate the differences.
+
+Left Join:
+sqlite> SELECT books.name, books.year_published, authors.author_name FROM books LEFT OUTER JOIN authors ON books.author_id = authors.id;
+The Hobbit|1937|J.R.R. Tolkien
+The Fellowship of the Ring|1954|J.R.R. Tolkien
+Animal Farm|1945|George Orwell
+1984|1949|George Orwell
+If on a winter's night a traveler|1979|Italo Calvino
+Harry Potter and the Prisoner of Azkaban|1999|J.K. Rowling
+Harry Potter and the Chamber of Secrets|1998|J.K. Rowling
+A Confederacy of Dunces|1980|
+
+Right Join:
+sqlite> SELECT books.name, books.year_published, authors.author_name FROM books RIGHT JOIN authors ON books.author_id = authors.id;
+Error: RIGHT and FULL OUTER JOINs are not currently supported
+
+Right Join is not currently supported by SQLite3, but if it had worked, I would have expected it to return all of the authors, with any books that they had written.
+
+Full Join:
+sqlite> SELECT books.name, books.year_published, authors.author_name FROM books FULL OUTER JOIN authors ON books.author_id = authors.id;
+Error: RIGHT and FULL OUTER JOINs are not currently supported
+
+Full Join is not currently supported by SQLite3, but if it had worked, I would have expected it to return all of the books and all of the authors, including authors without books listed and books without authors listed.
+
