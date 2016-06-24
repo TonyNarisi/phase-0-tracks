@@ -18,3 +18,24 @@ create_table_cmd = <<-SQL
   SQL
 
 db.execute(create_table_cmd)
+
+# User will be able to:
+#   - Add a record to collection
+#   - Update a record's rating
+#   - Update a record's quality
+#   - Delete a record from collection
+#   - View record collection
+
+def add_record(db, artist_name, album_name, rating, quality)
+  db.execute("INSERT INTO record_collection (artist_name, album_name, rating, quality) VALUES (?, ?, ?, ?)", [artist_name, album_name, rating, quality])
+end
+
+def update_rating(db, album_name, new_rating)
+  db.execute("UPDATE record_collection SET rating=? WHERE album_name=?", [new_rating, album_name])
+end
+
+# Test Code
+# add_record(db, "Julia Brown", "An Abundance of Strawberries", 10, "Excellent")
+# update_rating(db, "An Abundance of Strawberries", 9)
+
+# User interface will ask user what they would like to do
