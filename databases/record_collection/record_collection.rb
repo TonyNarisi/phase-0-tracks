@@ -13,4 +13,8 @@ create_table_cmd = <<-SQL
     artist_name VARCHAR(255),
     album_name VARCHAR(255),
     rating INT,
-    
+    quality VARCHAR(255)
+    )
+  SQL
+
+db.execute(create_table_cmd)
