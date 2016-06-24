@@ -48,10 +48,18 @@ def delete_record(db, album_name)
   db.execute("DELETE FROM record_collection WHERE album_name=?", [album_name])
 end
 
+def view_collection_all(db)
+  records = db.execute("SELECT * FROM record_collection")
+  records.each do |record|
+    puts "#{record[2]} by #{record[1]}, Rating: #{record[3]}, Quality: #{record[4]}"
+  end
+end
+
 # Test Code
 add_record(db, "Julia Brown", "An Abundance of Strawberries", 10, "Excellent")
 update_rating(db, "An Abundance of Strawberries", 9)
 update_quality(db, "An Abundance of Strawberries", "Very Good")
+view_collection_all(db)
 delete_record(db, "An Abundance of Strawberries")
 
 # User interface will ask user what they would like to do
