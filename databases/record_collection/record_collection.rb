@@ -44,9 +44,14 @@ def update_quality(db, album_name, new_quality)
   db.execute("UPDATE record_collection SET quality=? WHERE album_name=?", [new_quality, album_name])
 end
 
+def delete_record(db, album_name)
+  db.execute("DELETE FROM record_collection WHERE album_name=?", [album_name])
+end
+
 # Test Code
 add_record(db, "Julia Brown", "An Abundance of Strawberries", 10, "Excellent")
 update_rating(db, "An Abundance of Strawberries", 9)
 update_quality(db, "An Abundance of Strawberries", "Very Good")
+delete_record(db, "An Abundance of Strawberries")
 
 # User interface will ask user what they would like to do
