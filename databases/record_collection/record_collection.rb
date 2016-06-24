@@ -21,10 +21,16 @@ db.execute(create_table_cmd)
 
 # User will be able to:
 #   - Add a record to collection
+#     - Program should check to see if a record is already in the collection before adding it, and provide an error message if it is
 #   - Update a record's rating
+#     - Program should check to ensure the record is in the collection, and provide an error message if it is not
 #   - Update a record's quality
+#     - Program should check to ensure the record is in the collection, and provide an error message if it is not
 #   - Delete a record from collection
+#     - Program should check to ensure the record is in the collection, and provide an error message if it is not
 #   - View record collection
+#     - Program should ask user if they want to view entire collection, or if they want to view based on specific criteria
+#       - User can view all records by a specific artist, all records above or below a certain rating, or all records with a specific quality
 
 def add_record(db, artist_name, album_name, rating, quality)
   db.execute("INSERT INTO record_collection (artist_name, album_name, rating, quality) VALUES (?, ?, ?, ?)", [artist_name, album_name, rating, quality])
