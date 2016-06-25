@@ -30,7 +30,7 @@ db.execute(create_table_cmd)
 #     - Program should check to ensure the record is in the collection, and provide an error message if it is not
 #   - View record collection
 #     - Program should ask user if they want to view entire collection, or if they want to view based on specific criteria
-#       - User can view all records by a specific artist, all records above or below a certain rating, or all records with a specific quality
+#       - User can view all records by a specific artist, all records above a certain rating, or all records with a specific quality
 
 def add_record(db, artist_name, album_name, rating, quality)
   db.execute("INSERT INTO record_collection (artist_name, album_name, rating, quality) VALUES (?, ?, ?, ?)", [artist_name, album_name, rating, quality])
@@ -55,11 +55,21 @@ def view_collection_all(db)
   end
 end
 
+# This statement was returning errors when using placeholders for category and operator.
+def view_collection_select(db, category, operator, value)
+  records = db.execute("SELECT * FROM record_collection WHERE #{category} #{operator} ?", [value])
+  records.each do |record|
+    puts "#{record[2]} by #{record[1]}, Rating: #{record[3]}, Quality: #{record[4]}"
+  end
+end
+
 # Test Code
 add_record(db, "Julia Brown", "An Abundance of Strawberries", 10, "Excellent")
-update_rating(db, "An Abundance of Strawberries", 9)
-update_quality(db, "An Abundance of Strawberries", "Very Good")
-view_collection_all(db)
-delete_record(db, "An Abundance of Strawberries")
+add_record(db, "Los Campesinos!", "No Blues", 7, "Very Good")
+# update_rating(db, "An Abundance of Strawberries", 9)
+# update_quality(db, "An Abundance of Strawberries", "Very Good")
+# view_collection_all(db)
+view_collection_select(db, "quality", "=", "Excellent")
+# delete_record(db, "An Abundance of Strawberries")
 
 # User interface will ask user what they would like to do
