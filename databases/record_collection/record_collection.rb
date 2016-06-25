@@ -63,21 +63,20 @@ def view_collection_select(db, category, operator, value)
   end
 end
 
-# Test Code
-# add_record(db, "Julia Brown", "An Abundance of Strawberries", 10, "Excellent")
-# add_record(db, "Los Campesinos!", "No Blues", 7, "Very Good")
-# update_rating(db, "An Abundance of Strawberries", 9)
-# update_quality(db, "An Abundance of Strawberries", "Very Good")
-# view_collection_all(db)
-# view_collection_select(db, "quality", "=", "Excellent")
-# delete_record(db, "An Abundance of Strawberries")
+# This method is for use in the user interface, to increase DRYness.
+
+def id_bank_generator(db)
+  id_bank = []
+  view_collection_all(db).each {|record| id_bank << record[0]}
+  id_bank
+end
 
 # USER INTERFACE
 
-# The user interface operates on one large loop, so the user can do as many actions as he or she wants
+# The user interface works on a loop, that is broken by the user entering menu option 7 on the main menu.
 
-# until continue_loop == false
-#   break if continue_loop == false
+continue_loop = true
+until continue_loop == false
 
   # User interface will ask user what they would like to do, and check for errors in their answer
 
@@ -87,8 +86,10 @@ end
     3. Update a record's quality
     4. Delete record from collection
     5. View entire collection
-    6. View specific piece of collection"
+    6. View specific piece of collection
+    7. Exit"
   menu_option = gets.chomp.to_i
+  break if menu_option == 7
   until menu_option > 0 && menu_option < 7
     puts "Please choose a valid option from the menu, using only the number listed."
     menu_option = gets.chomp.to_i
@@ -106,79 +107,47 @@ end
     puts "What quality is this record?"
       quality = gets.chomp
     add_record(db, artist_name, album_name, rating, quality)
-    puts "Album successfully added to collection! Would you like to do anything else today? Please answer 'yes' or 'no'."
-    more_actions = gets.chomp
-    until more_actions == "yes" || more_actions == "no"
-      puts "Please select a valid option."
-      more_actions = gets.chomp
-    end
+    puts "Album successfully added to collection!"
 
   elsif menu_option == 2
     view_collection_all(db)
-    id_bank = []
-    view_collection_all(db).each {|record| id_bank << record[0]}
     puts "What is the ID of the album whose rating you would like to edit?"
     id = gets.chomp.to_i
-    until id_bank.include?(id)
+    until id_bank_generator(db).include?(id)
       puts "Please select a valid ID number."
       id = gets.chomp.to_i    
     end
     puts "What is the new rating you would like to give this album?"
     new_rating = gets.chomp.to_i
     update_rating(db, id, new_rating)
-    puts "Rating successfully updated! Would you like to do anything else today? Please answer 'yes' or 'no'."
-    more_actions = gets.chomp
-    until more_actions == "yes" || more_actions == "no"
-      puts "Please select a valid option."
-      more_actions = gets.chomp
-    end
+    puts "Rating successfully updated!"
 
   elsif menu_option == 3
     view_collection_all(db)
-    id_bank = []
-    records.each {|record| id_bank << record[0]}
     puts "What is the ID of the album whose quality you would like to update?"
     id = gets.chomp.to_i
-    until id_bank.include?(id)
+    until id_bank_generator(db).include?(id)
       puts "Please select a valid ID number."
       id = gets.chomp.to_i
     end
     puts "What is the quality you would like to give this album?"
     new_quality = gets.chomp
     update_quality(db, id, new_quality)
-    puts "Quality successfully updated! Would you like to do anything else today? Please answer 'yes' or 'no'."
-    more_actions = gets.chomp
-    until more_actions == "yes" || more_actions == "no"
-      puts "Please select a valid option."
-      more_actions = gets.chomp
-    end
+    puts "Quality successfully updated!"
 
   elsif menu_option == 4
     view_collection_all(db)
-    id_bank = []
-    records.each {|record| id_bank << record[0]}
     puts "What is the ID of the album you would like to delete?"
     id = gets.chomp.to_i
-    until id_bank.include?(id)
+    until id_bank_generator(db).include?(id)
       puts "Please select a valid ID number."
       id = gets.chomp.to_i
     end
     delete_record(db, id)
-    puts "Record successfully deleted! Would you like to do anything else today? Please answer 'yes' or 'no'."
-    more_actions = gets.chomp
-    until more_actions == "yes" || more_actions == "no"
-      puts "Please select a valid option."
-      more_actions = gets.chomp
-    end
+    puts "Record successfully deleted!"
 
   elsif menu_option == 5
     view_collection_all(db)
-    puts "Would you like to do anything else today? Please answer 'yes' or 'no'."
-    more_actions = gets.chomp
-    until more_actions == "yes" || more_actions == "no"
-      puts "Please select a valid option."
-      more_actions = gets.chomp
-    end
 
   else
     puts "What category would you like to limit your search by?
@@ -215,7 +184,7 @@ end
       puts "What quality would you like to limit your search to?"
       quality_search = gets.chomp
       view_collection_select(db, "quality", "=", quality_search)
+    end
   end
 
-# end
-
+end
