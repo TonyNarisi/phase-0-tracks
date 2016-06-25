@@ -67,7 +67,8 @@ end
 
 def id_bank_generator(db)
   id_bank = []
-  view_collection_all(db).each {|record| id_bank << record[0]}
+  records = db.execute("SELECT * FROM record_collection")
+  records.each {|record| id_bank << record[0]}
   id_bank
 end
 
