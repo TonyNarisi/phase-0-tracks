@@ -21,15 +21,13 @@ db.execute(create_table_cmd)
 
 # User will be able to:
 #   - Add a record to collection
+#     - New records will be given a primary key ID, an artist name, an album name, a rating, and a quality
 #   - Update a record's rating
-#     - Program should check to ensure the record is in the collection, and provide an error message if it is not
 #   - Update a record's quality
-#     - Program should check to ensure the record is in the collection, and provide an error message if it is not
 #   - Delete a record from collection
-#     - Program should check to ensure the record is in the collection, and provide an error message if it is not
-#   - View record collection
-#     - Program should ask user if they want to view entire collection, or if they want to view based on specific criteria
-#       - User can view all records by a specific artist, all records above a certain rating, or all records with a specific quality
+#   - View entire record collection
+#   - View collection based on specific criteria
+#     - User can view all records by a specific artist, all records above, below, or equal to a certain rating, or all records with a specific quality
 
 def add_record(db, artist_name, album_name, rating, quality)
   db.execute("INSERT INTO record_collection (artist_name, album_name, rating, quality) VALUES (?, ?, ?, ?)", [artist_name, album_name, rating, quality])
@@ -52,7 +50,6 @@ def view_collection_all(db)
   records.each do |record|
     puts "#{record[2]} by #{record[1]}, Rating: #{record[3]}, Quality: #{record[4]}, ID: #{record[0]}"
   end
-  return records
 end
 
 # This statement was returning errors when using placeholders for category and operator. Re-visit after finishing program to troubleshoot.
@@ -87,7 +84,7 @@ until continue_loop == false
     3. Update a record's quality
     4. Delete record from collection
     5. View entire collection
-    6. View specific piece of collection
+    6. View specific selection of collection
     7. Exit"
   menu_option = gets.chomp.to_i
   break if menu_option == 7
@@ -110,6 +107,7 @@ until continue_loop == false
     add_record(db, artist_name, album_name, rating, quality)
     puts "Album successfully added to collection!"
 
+  # This option, and the two below it, first show the user the entire collection, so he or she can easily reference the ID numbers.
   elsif menu_option == 2
     view_collection_all(db)
     puts "What is the ID of the album whose rating you would like to edit?"
