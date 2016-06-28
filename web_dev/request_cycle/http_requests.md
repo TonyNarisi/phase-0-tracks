@@ -17,4 +17,4 @@ A GET request asks for data to be taken from a source to be displayed on the loc
 
 Question 4
 
-A cookie is a piece of information that is stored in a user's web browser, to be accessed at later times by a website or websites that the user visits. A cookie could be used to remember if a user is logged in with a certain account. They relate to HTTP requests because they are a way for the user's machine to communicate with the web site that they are connecting to.
+A cookie is a piece of information that is stored in a user's web browser, to be accessed at later times by a website or websites that the user visits. A cookie could be used to remember if a user is logged in with a certain account. They relate to HTTP requests because they are a way for the user's machine to communicate with the website that they are connecting to.
