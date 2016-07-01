@@ -1,0 +1,13 @@
+h1 {
+  background-color: grey;
+  font-size: 36px;
+  font-style: strong;
+}
+
+h1:hover {
+  cursor: pointer;
+}
+
+#drop-list {
+  visibility: hidden;
+}
