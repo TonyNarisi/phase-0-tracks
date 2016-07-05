@@ -1,0 +1,59 @@
+body {
+  font-family: Helvetica;
+}
+
+h1 {
+  text-align: center;
+}
+
+#nav-list {
+  background-color: #B7BEC4;
+  text-align: center;
+  width: 1100px;
+}
+
+#nav-list p {
+  display: inline-block;
+  padding: 2px 50px;
+  margin: 5px 0px;
+  border-right: 2px solid #000000;
+}
+
+#nav-list p:hover {
+  cursor: pointer;
+}
+
+#nav-list p:first-of-type {
+  border-left: 2px solid #000000;
+}
+
+#body-text {
+  width: 1100px;
+  text-align: justify;
+}
+
+#products-list {
+  width: 160px;
+  margin-left: 220px;
+}
+
+#about-us-list {
+  width: 170px;
+  margin-left: 380px;
+}
+
+#news-list {
+  width: 150px;
+  margin-left: 550px;
+}
+
+#contact-list {
+  width: 185px;
+  margin-left: 700px;
+}
+
+.drop-down-menu {
+  background-color: #B7BEC4;
+  position: absolute;
+  display: none;
+}
